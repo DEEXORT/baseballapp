@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-header',
+  selector: 'app-navigation',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './header.component.html',
-  styleUrl: './header.component.scss'
+  templateUrl: './navigation.component.html',
+  styleUrl: './navigation.component.scss'
 })
-export class HeaderComponent {
+export class NavigationComponent {
 
 }
