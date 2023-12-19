@@ -1,0 +1,39 @@
+$container-width: 600px;
+$container-height: 400px;
+
+@import "buttons";
+
+.container {
+  width: $container-width;
+  height: $container-height;
+  border-radius: 20px;
+  background: #ffffff;
+  box-shadow: 1px 1px 10px #D9D9D9, -1px -1px 10px #D9D9D9;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  animation: modal-animation 0.5s ease-out;
+  @keyframes modal-animation {
+    0% {
+      transform: translate(-50%, -70%);
+      opacity: 0;
+    }
+    100% {
+      transform: translate(-50%, -50%);
+      opacity: 1;
+    }
+  }
+
+  .button-container {
+    @include buttons;
+  }
+}
+
+label {
+  display: block;
+  input {
+    display: block;
+  }
+}

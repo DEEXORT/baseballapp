@@ -1,0 +1,50 @@
+*{
+  padding: 0;
+  box-sizing: border-box;
+}
+
+header {
+  font-family: 'Jura', sans-serif;
+  font-weight: 600;
+  background: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  border-radius: 10px;
+}
+
+.nav-dex {
+  // Первый уровень навигации
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    background: #ffffff;
+  }
+  li {
+    position: relative;
+    a {
+      padding: 5px 20px;
+      color: #123;
+      font-size: 20pt;
+      display: block;
+    }
+    // Второй уровень навигации
+    ul {
+      display: none;
+      position: absolute;
+      width: max-content;
+      flex-direction: column;
+      border-radius: 10px;
+      a {
+        font-size: 20px;
+      }
+    }
+  }
+  li:hover > ul {
+    display: flex;
+  }
+  li:hover > a {
+    color: #007088;
+  }
+}
