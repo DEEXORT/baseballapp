@@ -21,12 +21,19 @@ export class ListPlayersComponent {
   constructor(private httpService: HttpService) {
   }
 
+  // public logArray(obj: any) {
+  //   obj.forEach((item: any[], index: any, array: any) => {
+  //     console.log(item)
+  //   })
+  //   console.log(obj)
+  // }
+
   ngOnInit() {
     this.getAllPlayers();
   }
 
   public getAllPlayers() {
-    this.httpService.getPlayers('players').subscribe({next: (data: IPlayer[]) => {this.players = data}});
+    this.httpService.getRequest('players').subscribe({next: (data: IPlayer[]) => {this.players = data}});
   }
 
   public showModalDialog() {

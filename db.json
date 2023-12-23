@@ -20,6 +20,21 @@
       "number": 69,
       "position": "C",
       "batAndThrow": "R/R"
+    },
+    {
+      "id": 3,
+      "name": "Игрок без номера",
+      "position": "C",
+      "batAndThrow": "R/R"
+    },
+    {
+      "id": 3,
+      "name": "Игрок без номера и позиции",
+      "batAndThrow": "R/R"
+    },
+    {
+      "id": 3,
+      "name": "Игрок с одним именем"
     }
   ]
 }
