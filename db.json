@@ -1,6 +1,25 @@
 {
   "players": [
     {
+      "id": 1,
+      "name": "Гимальдинов Денис",
+      "number": 4,
+      "position": "SS/1B/C",
+      "batAndThrow": "R/R"
+    },
+    {
+      "id": 2,
+      "name": "Лушас Артем",
+      "number": 15,
+      "position": "1B/LF",
+      "batAndThrow": "R/R"
+    },
+    {
+      "id": 3,
+      "name": "Посадский Макс",
+      "number": 69,
+      "position": "C",
+      "batAndThrow": "R/R"
     }
   ]
 }

@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import {
   ModalDialogComponentComponent
 } from "../../shared/components/modal-dialog-component/modal-dialog-component.component";
+import {HttpService} from "../../shared/services/httpService";
+import {IPlayer} from "../../shared/interfaces/player";
 
 @Component({
   selector: 'list-players',
@@ -14,6 +16,18 @@ import {
 export class ListPlayersComponent {
   @Input() isConfirmed: boolean = false;
   public isModalDialogVisible: boolean = false;
+  players: IPlayer[] = []
+
+  constructor(private httpService: HttpService) {
+  }
+
+  ngOnInit() {
+    this.getAllPlayers();
+  }
+
+  public getAllPlayers() {
+    this.httpService.getPlayers('players').subscribe({next: (data: IPlayer[]) => {this.players = data}});
+  }
 
   public showModalDialog() {
     this.isModalDialogVisible = true;
