@@ -1,12 +1,12 @@
 <!--Лист игроков-->
   <div class="container">
     <div class="buttons-container">
-      <button class="button-add" (click)="showModalDialog()">Добавить</button>
-      <button class="button-disabled">Редактировать</button>
-      <button class="button-delete">Удалить</button>
+      <button [ngClass]="isSelectPlayer ? 'button-disabled' : 'button-add'" (click)="showModalDialog()">Добавить</button>
+      <button [ngClass]="isSelectPlayer ? 'button-edit' : 'button-disabled'">Редактировать</button>
+      <button [ngClass]="isSelectPlayer ? 'button-delete' : 'button-disabled'">Удалить</button>
     </div>
 
-    <modal-dialog *ngIf="isModalDialogVisible" (isConfirmed)="closeModalDialog()"></modal-dialog>
+    <form-player *ngIf="isModalDialogVisible" (isCloseForm)="closeModalDialog()" [selectPlayer]="this.selectPlayer"></form-player>
 
     <table>
       <thead>
@@ -18,7 +18,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let player of players">
+      <tr *ngFor="let player of players" (click)="onSelectPlayer(player); isSelectPlayer = true">
         <td><a href="#">{{player.name}}</a></td>
         <td>{{player.number}}</td>
         <td>{{player.batAndThrow}}</td>

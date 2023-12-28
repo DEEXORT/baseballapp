@@ -9,12 +9,6 @@
 }
 
 @mixin buttons {
-  //display: flex;
-  //flex-wrap: wrap;
-  //
-  //a {
-  //  color: white;
-  //}
 
   .button-add {
     @extend %button-shared;

@@ -12,13 +12,19 @@ export class HttpService {
 
   url = 'http://localhost:3000'
 
-  getRequest(table: string): Observable<IPlayer[]> {
+  getRequest(table: string): Observable<any> {
 
-    console.log(`HTTP запрос в базу ${table}...`)
-    const dbTable = '/' + table;
+    console.log(`GET-запрос в базу ${table}...`)
 
-    return this.http.get(this.url + dbTable)
+    return this.http.get(this.url + '/' + table)
       .pipe(map((data: any) => {return data}))
+  }
+
+  saveRequest(table: string, data: IPlayer) {
+
+    console.log(`PUT-запрос в базу ${table}...`)
+
+    this.http.put(this.url + '/' + table, data)
   }
 
 }

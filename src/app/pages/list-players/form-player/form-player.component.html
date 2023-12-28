@@ -1,0 +1,16 @@
+<div class="container">
+  <h1>Форма игрока</h1>
+  <form [formGroup]="formPlayer">
+    <label>Имя</label>
+    <input type="text" formControlName="name">
+    <label>Номер</label>
+    <input type="number" formControlName="number">
+    <label>На бите/бросковая рука</label>
+    <input type="text" formControlName="batAndThrow">
+    <label>Позиция</label>
+    <input type="text" formControlName="position">
+  </form>
+
+  <button>Сохранить</button>
+  <button (click)="closeForm()">Закрыть</button>
+</div>
