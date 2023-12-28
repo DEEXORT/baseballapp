@@ -43,6 +43,8 @@ export class ListPlayersComponent {
 
   public closeModalDialog() {
     this.isModalDialogVisible = false; // Временно
+    this.isSelectPlayer = false;
+    this.selectPlayer = {};
   }
 
   public onSelectPlayer(player: IPlayer) {

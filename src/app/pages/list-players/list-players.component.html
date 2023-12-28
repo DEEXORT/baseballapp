@@ -6,6 +6,7 @@
       <button [ngClass]="isSelectPlayer ? 'button-delete' : 'button-disabled'">Удалить</button>
     </div>
 
+<!--    Форма для добавления/редактирования игроков-->
     <form-player *ngIf="isModalDialogVisible" (isCloseForm)="closeModalDialog()" [selectPlayer]="this.selectPlayer"></form-player>
 
     <table>
