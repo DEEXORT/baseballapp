@@ -5,3 +5,32 @@
   // Временно
   margin: 100px;
 }
+
+@import '../../shared/styles/forms';
+@import "../../shared/styles/buttons";
+
+input {
+  @include input-form;
+  display: block;
+}
+
+.button-container {
+  @include button-style;
+  @include button-hover;
+  @include button-focus;
+}
+
+.input-invalid {
+  border: none;
+  border-bottom: 2px solid #e58686;
+}
+
+.input-valid {
+  border: none;
+  border-bottom: 2px solid #96f893;
+}
+
+input:focus {
+  outline: none;
+  background: #eaeaea;
+}

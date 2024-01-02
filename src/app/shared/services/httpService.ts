@@ -20,11 +20,23 @@ export class HttpService {
       .pipe(map((data: any) => {return data}))
   }
 
-  saveRequest(table: string, data: IPlayer) {
+  saveRequest(table: string, data: any) {
 
     console.log(`PUT-запрос в базу ${table}...`)
 
     this.http.put(this.url + '/' + table, data)
+  }
+
+  updateRequest(table: string, id: number) {
+
+  }
+
+  deleteRequest(table: string, id: number) {
+
+  }
+
+  saveRequestPlayer(data: IPlayer) {
+
   }
 
 }

@@ -6,41 +6,47 @@
   color: #ffffff;
   font-family: 'Jura', sans-serif;
   font-size: 15pt;
+
 }
 
-@mixin buttons {
+@mixin button-style {
 
-  .button-add {
-    @extend %button-shared;
-    background: #34bf5b;
-  }
+    .button-add {
+      @extend %button-shared;
+      background: #34bf5b;
+    }
 
-  .button-edit {
-    @extend %button-shared;
-    background: #34bfb7;
-  }
+    .button-edit {
+      @extend %button-shared;
+      background: #34bfb7;
+    }
 
-  .button-delete {
-    @extend %button-shared;
-    background: #F86666;
-  }
+    .button-delete {
+      @extend %button-shared;
+      background: #F86666;
+    }
 
-  .button-light {
-    @extend %button-shared;
-    background: #ffffff;
-    border: 1px solid black;
-    color: black;
-  }
+    .button-light {
+      @extend %button-shared;
+      background: #ffffff;
+      border: 1px solid black;
+      color: black;
+    }
 
-  .button-disabled {
-    @extend %button-shared;
-    pointer-events: none;
-  }
+    .button-disabled {
+      @extend %button-shared;
+      pointer-events: none;
+    }
 
+}
+
+@mixin button-hover {
   :hover {
     filter: brightness(85%);
   }
+}
 
+@mixin button-focus {
   :focus {
     filter: drop-shadow(1px 1px 10px #bebebe);
   }

@@ -15,7 +15,9 @@
     display: flex;
     flex-wrap: wrap;
 
-    @include buttons;
+    @include button-style;
+    @include button-focus;
+    @include button-hover;
   }
 }
 

@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
+import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {IPlayer} from "../../../shared/interfaces/player";
 
 @Component({
@@ -32,11 +32,28 @@ export class FormPlayerComponent {
 
   private _createForm() {
     this.formPlayer = this.fb.group({
-      name: '',
+      name: [
+        '',
+        [Validators.required,
+        Validators.minLength(5)]],
       number: null,
       batAndThrow: '',
       position: ''
     });
+  }
+
+  get _namePlayer() {
+    return this.formPlayer.get('name')
+  }
+
+  public validatorNamePlayer(): string {
+    if (this._namePlayer?.valid && this._namePlayer?.dirty) {
+      return 'input-valid'
+    }
+    if (this._namePlayer?.invalid && this._namePlayer?.dirty) {
+      return 'input-invalid'
+    }
+    return ''
   }
 
   public closeForm() {
