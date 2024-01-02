@@ -7,8 +7,8 @@
     </div>
 
 <!--    Форма для добавления/редактирования игроков-->
-    <form-player *ngIf="true" (isCloseForm)="closeModalDialog()" [selectPlayer]="this.selectPlayer"></form-player>
-<!--    <form-player *ngIf="isModalDialogVisible" (isCloseForm)="closeModalDialog()" [selectPlayer]="this.selectPlayer"></form-player>-->
+<!--    <form-player *ngIf="true" (isCloseForm)="closeModalDialog()" [selectPlayer]="this.selectPlayer"></form-player>-->
+    <form-player *ngIf="isModalDialogVisible" (isCloseForm)="closeModalDialog()" [selectPlayer]="this.selectPlayer"></form-player>
 
     <table>
       <thead>

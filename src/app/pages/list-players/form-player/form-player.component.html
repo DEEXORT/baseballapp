@@ -2,18 +2,21 @@
   <h1>Форма игрока</h1>
   <form [formGroup]="formPlayer">
     <label>Имя</label>
-    <input [ngClass]="validatorNamePlayer()" type="text" formControlName="name">
-    <div *ngIf="validatorNamePlayer() === 'input-invalid'">Введите не менее 5 символов</div>
+    <input [ngClass]="formValidator('name')" type="text" formControlName="name">
+    <div *ngIf="formValidator('name') === 'input-invalid'">Введите не менее 5 символов</div>
+
     <label>Номер</label>
-    <input type="number" formControlName="number">
+    <input [ngClass]="formValidator('number')" type="number" formControlName="number">
+
     <label>На бите/бросковая рука</label>
-    <input type="text" formControlName="batAndThrow">
+    <input [ngClass]="formValidator('batAndThrow')" type="text" formControlName="batAndThrow">
+
     <label>Позиция</label>
-    <input type="text" formControlName="position">
+    <input [ngClass]="formValidator('position')" type="text" formControlName="position">
   </form>
 
   <div class="button-container">
-    <button class="button-add">Сохранить</button>
+    <button [ngClass]="formPlayer?.valid ? 'button-add' : 'button-disabled'">Сохранить</button>
     <button class="button-light" (click)="closeForm()">Закрыть</button>
   </div>
   </div>

@@ -36,21 +36,31 @@ export class FormPlayerComponent {
         '',
         [Validators.required,
         Validators.minLength(5)]],
-      number: null,
-      batAndThrow: '',
-      position: ''
+      number: [
+        null,
+        [Validators.min(0)]],
+      batAndThrow: [
+        '',
+        [Validators.required,
+        Validators.minLength(1)]],
+      position: [
+        '',
+        [Validators.minLength(1)]],
     });
   }
 
-  get _namePlayer() {
-    return this.formPlayer.get('name')
+  private _getPropertyForm(property: string) {
+    return this.formPlayer.get(property)
   }
 
-  public validatorNamePlayer(): string {
-    if (this._namePlayer?.valid && this._namePlayer?.dirty) {
+  public formValidator(propertyName: string): string {
+    // Arguments: propertyName - имя формы, которую нужно провалидировать
+    // Callback: наименование CSS-класса
+
+    if (this._getPropertyForm(propertyName)?.valid && this._getPropertyForm(propertyName)?.dirty) {
       return 'input-valid'
     }
-    if (this._namePlayer?.invalid && this._namePlayer?.dirty) {
+    if (this._getPropertyForm(propertyName)?.invalid && this._getPropertyForm(propertyName)?.dirty) {
       return 'input-invalid'
     }
     return ''
