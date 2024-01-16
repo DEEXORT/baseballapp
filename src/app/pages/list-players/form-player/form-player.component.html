@@ -1,6 +1,7 @@
 <div class="container">
   <h1>Форма игрока</h1>
   <form [formGroup]="formPlayer">
+
     <label>Имя</label>
     <input [ngClass]="formValidator('name')" type="text" formControlName="name">
     <div *ngIf="formValidator('name') === 'input-invalid'">Введите не менее 5 символов</div>
@@ -9,7 +10,10 @@
     <input [ngClass]="formValidator('number')" type="number" formControlName="number">
 
     <label>На бите/бросковая рука</label>
-    <input [ngClass]="formValidator('batAndThrow')" type="text" formControlName="batAndThrow">
+    <input [ngClass]="formValidator('batAndThrow')" type="text" formControlName="batAndThrow"
+    pattern="[rRlL]*" allowed-charactes [allowedCharacters] = "['R', 'L', 'r', 'l']"
+           mask="A/A" [inputTransformFn]="inputTransformFn" [showMaskTyped]="true">
+    <div *ngIf="this.formPlayer.get('batAndThrow')?.invalid" class="toggle-visible">Введите 2 символа в формате "R/L"</div>
 
     <label>Позиция</label>
     <input [ngClass]="formValidator('position')" type="text" formControlName="position">

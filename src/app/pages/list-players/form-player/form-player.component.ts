@@ -2,11 +2,14 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {IPlayer} from "../../../shared/interfaces/player";
+import {NgxMaskDirective, provideNgxMask} from "ngx-mask";
+import {inputAllowedCharactersDirective} from "../../../shared/directives/input-allowed-characters.directive";
 
 @Component({
   selector: 'form-player',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, NgxMaskDirective, inputAllowedCharactersDirective],
+  providers: [provideNgxMask()],
   templateUrl: './form-player.component.html',
   styleUrl: './form-player.component.scss'
 })
@@ -16,6 +19,9 @@ export class FormPlayerComponent {
 
   formPlayer: FormGroup;
 
+  public inputTransformFn = (value: unknown): string =>
+    typeof value === 'string' ? value.toUpperCase() : String(value);
+
   constructor(private fb: FormBuilder) {
     this._createForm()
   }
@@ -24,11 +30,12 @@ export class FormPlayerComponent {
     console.log('Запуск компонента FormPlayer')
     this.formPlayer.valueChanges.subscribe((v) => {
       console.log(v)});
-    console.log(this.selectPlayer)
+
     if (this.selectPlayer) {
       this.formPlayer.patchValue(this.selectPlayer)
     }
   }
+
 
   private _createForm() {
     this.formPlayer = this.fb.group({

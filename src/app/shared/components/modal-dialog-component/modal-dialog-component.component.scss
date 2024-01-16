@@ -2,7 +2,7 @@ $container-width: 600px;
 $container-height: 400px;
 $container-center: translate(-50%, -50%);
 
-@import "buttons";
+//@import "buttons";
 
 .container {
   width: $container-width;
@@ -27,7 +27,7 @@ $container-center: translate(-50%, -50%);
     }
   }
 
-  .button-container {
-    @include buttons;
-  }
+  //.button-container {
+  //  @include buttons;
+  //}
 }

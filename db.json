@@ -40,6 +40,12 @@
       "id": 3,
       "name": "Игрок с null",
       "position": null
+    },
+    {
+      "id": 3,
+      "name": "Игрок с r/r",
+      "position": null,
+      "batAndThrow": "r/r"
     }
   ]
 }

@@ -9,9 +9,18 @@
 @import '../../shared/styles/forms';
 @import "../../shared/styles/buttons";
 
+
 input {
   @include input-form;
   display: block;
+
+  &:focus {
+    outline: none;
+    background: #eaeaea;
+  }
+  &:focus + .toggle-visible {
+    visibility: visible;
+  }
 }
 
 .button-container {
@@ -30,7 +39,16 @@ input {
   border-bottom: 2px solid #96f893;
 }
 
-input:focus {
-  outline: none;
-  background: #eaeaea;
+//input:focus {
+//  outline: none;
+//  background: #eaeaea;
+//}
+
+label {
+  display: inline-block;
+  margin-top: 10px;
+}
+
+.toggle-visible {
+  visibility: hidden;
 }
