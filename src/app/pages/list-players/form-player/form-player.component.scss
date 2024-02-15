@@ -1,5 +1,5 @@
 .container {
-  max-height: 600px;
+  min-height: 600px;
   max-width: 600px;
 
   // Временно
@@ -10,7 +10,7 @@
 @import "../../shared/styles/buttons";
 
 
-input {
+input[type=text], input[type=number], select {
   @include input-form;
   display: block;
 
@@ -21,6 +21,11 @@ input {
   &:focus + .toggle-visible {
     visibility: visible;
   }
+}
+
+label {
+  display: block;
+  margin-top: 10px;
 }
 
 .button-container {
@@ -39,16 +44,15 @@ input {
   border-bottom: 2px solid #96f893;
 }
 
-//input:focus {
-//  outline: none;
-//  background: #eaeaea;
-//}
-
-label {
-  display: inline-block;
-  margin-top: 10px;
-}
-
 .toggle-visible {
   visibility: hidden;
+}
+
+.prompt {
+  font-size: 16px;
+}
+
+.ng-select-material {
+  @import "../node_modules/@ng-select/ng-select/themes/material.theme.css";
+  max-width: 300px;
 }

@@ -1,14 +1,15 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {IPlayer} from "../../../shared/interfaces/player";
 import {NgxMaskDirective, provideNgxMask} from "ngx-mask";
-import {inputAllowedCharactersDirective} from "../../../shared/directives/input-allowed-characters.directive";
+import {NgSelectModule} from "@ng-select/ng-select";
+import {last} from "rxjs";
 
 @Component({
   selector: 'form-player',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, NgxMaskDirective, inputAllowedCharactersDirective],
+  imports: [CommonModule, ReactiveFormsModule, NgxMaskDirective, NgSelectModule, FormsModule],
   providers: [provideNgxMask()],
   templateUrl: './form-player.component.html',
   styleUrl: './form-player.component.scss'
@@ -18,6 +19,7 @@ export class FormPlayerComponent {
   @Output() isCloseForm: EventEmitter<boolean> = new EventEmitter<boolean>
 
   formPlayer: FormGroup;
+  positionOptions = ['P', 'C', '1B', '2B', '3B', 'SS', 'LF', 'CF', 'RF'];
 
   public inputTransformFn = (value: unknown): string =>
     typeof value === 'string' ? value.toUpperCase() : String(value);
@@ -49,9 +51,10 @@ export class FormPlayerComponent {
       batAndThrow: [
         '',
         [Validators.required,
-        Validators.minLength(1)]],
+        Validators.minLength(1),
+        Validators.pattern('[rRlL]*')]],
       position: [
-        '',
+        [],
         [Validators.minLength(1)]],
     });
   }
@@ -60,7 +63,7 @@ export class FormPlayerComponent {
     return this.formPlayer.get(property)
   }
 
-  public formValidator(propertyName: string): string {
+  public cssFormValidator(propertyName: string): string {
     // Arguments: propertyName - имя формы, которую нужно провалидировать
     // Callback: наименование CSS-класса
 
@@ -76,4 +79,6 @@ export class FormPlayerComponent {
   public closeForm() {
     this.isCloseForm.emit(true);
   }
+
+  protected readonly last = last;
 }

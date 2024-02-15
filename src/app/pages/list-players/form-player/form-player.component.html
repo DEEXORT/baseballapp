@@ -2,21 +2,43 @@
   <h1>Форма игрока</h1>
   <form [formGroup]="formPlayer">
 
-    <label>Имя</label>
-    <input [ngClass]="formValidator('name')" type="text" formControlName="name">
-    <div *ngIf="formValidator('name') === 'input-invalid'">Введите не менее 5 символов</div>
+    <label for="name">Имя</label>
+    <input [ngClass]="cssFormValidator('name')"
+           id="name"
+           type="text"
+           formControlName="name">
+    <div *ngIf="cssFormValidator('name') === 'input-invalid'" class="prompt">Введите не менее 5 символов</div>
 
-    <label>Номер</label>
-    <input [ngClass]="formValidator('number')" type="number" formControlName="number">
+    <label for="number">Номер</label>
+    <input [ngClass]="cssFormValidator('number')"
+           id="number"
+           type="number"
+           formControlName="number">
 
-    <label>На бите/бросковая рука</label>
-    <input [ngClass]="formValidator('batAndThrow')" type="text" formControlName="batAndThrow"
-    pattern="[rRlL]*" allowed-charactes [allowedCharacters] = "['R', 'L', 'r', 'l']"
-           mask="A/A" [inputTransformFn]="inputTransformFn" [showMaskTyped]="true">
-    <div *ngIf="this.formPlayer.get('batAndThrow')?.invalid" class="toggle-visible">Введите 2 символа в формате "R/L"</div>
+    <label for="batAndThrow">На бите/бросковая рука</label>
+    <input [ngClass]="cssFormValidator('batAndThrow')"
+           [inputTransformFn]="inputTransformFn"
+           [showMaskTyped]="true"
+           id="batAndThrow"
+           type="text"
+           formControlName="batAndThrow"
+           mask="A/A">
+    <div *ngIf="cssFormValidator('batAndThrow') === 'input-invalid'" class="prompt">Введите R(Right) или L(Left)</div>
 
-    <label>Позиция</label>
-    <input [ngClass]="formValidator('position')" type="text" formControlName="position">
+    <label for="position">Позиция</label>
+    <ng-select
+      [multiple]="true"
+      [closeOnSelect]="false"
+      [hideSelected]="true"
+      [items]="positionOptions"
+      id="position"
+      dropdownPosition="bottom"
+      formControlName="position"
+      class="ng-select-material">
+      <ng-option *ngFor="let position of positionOptions">{{position}}</ng-option>
+    </ng-select>
+
+
   </form>
 
   <div class="button-container">
