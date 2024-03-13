@@ -35,7 +35,7 @@ table {
     text-align: center;
   }
 
-  tr:hover > td {
+  tr:hover > td, td:focus-within {
     background: #E3E3E3;
   }
 

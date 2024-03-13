@@ -5,6 +5,7 @@ import {IPlayer} from "../../../shared/interfaces/player";
 import {NgxMaskDirective, provideNgxMask} from "ngx-mask";
 import {NgSelectModule} from "@ng-select/ng-select";
 import {last} from "rxjs";
+import {HttpService} from "../../../shared/services/httpService";
 
 @Component({
   selector: 'form-player',
@@ -16,6 +17,7 @@ import {last} from "rxjs";
 })
 export class FormPlayerComponent {
   @Input() selectPlayer: IPlayer
+  @Output() selectPlayerChange: EventEmitter<IPlayer> = new EventEmitter<IPlayer>
   @Output() isCloseForm: EventEmitter<boolean> = new EventEmitter<boolean>
 
   formPlayer: FormGroup;
@@ -24,7 +26,7 @@ export class FormPlayerComponent {
   public inputTransformFn = (value: unknown): string =>
     typeof value === 'string' ? value.toUpperCase() : String(value);
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private httpService: HttpService) {
     this._createForm()
   }
 
@@ -49,10 +51,9 @@ export class FormPlayerComponent {
         null,
         [Validators.min(0)]],
       batAndThrow: [
-        '',
+        "",
         [Validators.required,
-        Validators.minLength(1),
-        Validators.pattern('[rRlL]*')]],
+        Validators.pattern('[rRlL/]*')]],
       position: [
         [],
         [Validators.minLength(1)]],
@@ -63,17 +64,31 @@ export class FormPlayerComponent {
     return this.formPlayer.get(property)
   }
 
-  public cssFormValidator(propertyName: string): string {
-    // Arguments: propertyName - имя формы, которую нужно провалидировать
+  public cssFormValidator(nameForm: string): string {
+    // Arguments: nameForm - имя формы, которую нужно провалидировать
     // Callback: наименование CSS-класса
 
-    if (this._getPropertyForm(propertyName)?.valid && this._getPropertyForm(propertyName)?.dirty) {
+    if (this._getPropertyForm(nameForm)?.valid && this._getPropertyForm(nameForm)?.dirty) {
       return 'input-valid'
     }
-    if (this._getPropertyForm(propertyName)?.invalid && this._getPropertyForm(propertyName)?.dirty) {
+    if (this._getPropertyForm(nameForm)?.invalid && this._getPropertyForm(nameForm)?.dirty) {
       return 'input-invalid'
     }
     return ''
+  }
+
+  public saveToDatabase() {
+    // Добавление нового игрока в БД
+   this.httpService.saveRequest('players', this.formPlayer.value).subscribe({
+       next: result => {
+         this.formPlayer.patchValue(result)
+         alert("Игрок добавлен")
+         // Отправка добавленного игрока в лист игроков
+         this.selectPlayerChange.emit(result)
+         // Закрытие окна
+         this.closeForm()
+       }
+   })
   }
 
   public closeForm() {

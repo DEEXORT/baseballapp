@@ -1,14 +1,14 @@
 <!--Лист игроков-->
   <div class="container">
     <div class="buttons-container">
-      <button [ngClass]="isSelectPlayer ? 'button-disabled' : 'button-style button-add'" (click)="showModalDialog()">Добавить</button>
+      <button [ngClass]="isSelectPlayer ? 'button-disabled' : 'button-style button-add'" (click)="addPlayer()">Добавить</button>
       <button [ngClass]="isSelectPlayer ? 'button-edit' : 'button-disabled'">Редактировать</button>
-      <button [ngClass]="isSelectPlayer ? 'button-delete' : 'button-disabled'">Удалить</button>
+      <button [ngClass]="isSelectPlayer ? 'button-delete' : 'button-disabled'" (click)="deletePlayer()">Удалить</button>
     </div>
 
 <!--    Форма для добавления/редактирования игроков-->
-    <form-player *ngIf="true" (isCloseForm)="closeModalDialog()" [selectPlayer]="this.selectPlayer"></form-player>
-<!--    <form-player *ngIf="isModalDialogVisible" (isCloseForm)="closeModalDialog()" [selectPlayer]="this.selectPlayer"></form-player>-->
+<!--    <form-player *ngIf="true" (isCloseForm)="closeModalDialog()" [selectPlayer]="this.selectPlayer"></form-player>-->
+    <form-player *ngIf="isModalDialogVisible" (isCloseForm)="closeFormPlayer()" [(selectPlayer)]="this.selectPlayer"></form-player>
 
     <table>
       <thead>

@@ -4,48 +4,49 @@
       "id": 1,
       "name": "Гимальдинов Денис",
       "number": 4,
-      "position": ["SS","1B","C"],
+      "position": [
+        "SS",
+        "1B",
+        "C"
+      ],
       "batAndThrow": "R/R"
     },
     {
       "id": 2,
       "name": "Лушас Артем",
       "number": 15,
-      "position": ["1B","LF"],
+      "position": [
+        "1B",
+        "LF"
+      ],
       "batAndThrow": "R/R"
     },
     {
-      "id": 3,
-      "name": "Посадский Макс",
-      "number": 69,
-      "position": ["C"],
-      "batAndThrow": "R/R"
+      "name": "Денис",
+      "number": 232,
+      "batAndThrow": "R/R",
+      "position": [
+        "C"
+      ],
+      "id": 3
     },
     {
-      "id": 3,
-      "name": "Игрок без номера",
-      "position": ["C"],
-      "batAndThrow": "RR"
+      "name": "Денис",
+      "number": 232,
+      "batAndThrow": "R/L",
+      "position": [
+        "C"
+      ],
+      "id": 4
     },
     {
-      "id": 3,
-      "name": "Игрок без номера и позиции",
-      "batAndThrow": "R/R"
-    },
-    {
-      "id": 3,
-      "name": "Игрок с одним именем"
-    },
-    {
-      "id": 3,
-      "name": "Игрок с null",
-      "position": null
-    },
-    {
-      "id": 3,
-      "name": "Игрок с r/r",
-      "position": null,
-      "batAndThrow": "r/r"
+      "name": "Денис",
+      "number": 24,
+      "batAndThrow": "R/R",
+      "position": [
+        "1B"
+      ],
+      "id": 5
     }
   ]
 }

@@ -2,6 +2,7 @@ import {Injectable} from "@angular/core";
 import {IPlayer} from "../interfaces/player";
 import {map, Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
+import {log} from "@angular-devkit/build-angular/src/builders/ssr-dev-server";
 
 @Injectable()
 
@@ -22,9 +23,9 @@ export class HttpService {
 
   saveRequest(table: string, data: any) {
 
-    console.log(`PUT-запрос в базу ${table}...`)
+    console.log(`POST-запрос в базу ${table} данные ${data}`)
 
-    this.http.put(this.url + '/' + table, data)
+    return this.http.post(this.url + '/' + table, data)
   }
 
   updateRequest(table: string, id: number) {
@@ -32,7 +33,7 @@ export class HttpService {
   }
 
   deleteRequest(table: string, id: number) {
-
+    return this.http.delete(this.url + '/' + table + '/' + id)
   }
 
   saveRequestPlayer(data: IPlayer) {

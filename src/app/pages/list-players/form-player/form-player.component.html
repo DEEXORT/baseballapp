@@ -19,6 +19,7 @@
     <input [ngClass]="cssFormValidator('batAndThrow')"
            [inputTransformFn]="inputTransformFn"
            [showMaskTyped]="true"
+           [dropSpecialCharacters]="false"
            id="batAndThrow"
            type="text"
            formControlName="batAndThrow"
@@ -37,12 +38,10 @@
       class="ng-select-material">
       <ng-option *ngFor="let position of positionOptions">{{position}}</ng-option>
     </ng-select>
-
-
   </form>
 
   <div class="button-container">
-    <button [ngClass]="formPlayer?.valid ? 'button-add' : 'button-disabled'">Сохранить</button>
+    <button [ngClass]="formPlayer?.valid ? 'button-add' : 'button-disabled'" (click)="saveToDatabase()">Сохранить</button>
     <button class="button-light" (click)="closeForm()">Закрыть</button>
   </div>
   </div>
