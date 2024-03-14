@@ -22,31 +22,33 @@
       "batAndThrow": "R/R"
     },
     {
+      "id": 3,
       "name": "Денис",
-      "number": 232,
+      "number": 23,
       "batAndThrow": "R/R",
       "position": [
-        "C"
-      ],
-      "id": 3
+        "C",
+        "3B",
+        "1B"
+      ]
     },
     {
-      "name": "Денис",
-      "number": 232,
+      "id": 4,
+      "name": "Иван П",
+      "number": 45,
       "batAndThrow": "R/L",
       "position": [
         "C"
-      ],
-      "id": 4
+      ]
     },
     {
-      "name": "Денис",
-      "number": 24,
+      "id": 5,
+      "name": "Fernando",
+      "number": 1,
       "batAndThrow": "R/R",
       "position": [
-        "1B"
-      ],
-      "id": 5
+        "P"
+      ]
     }
   ]
 }

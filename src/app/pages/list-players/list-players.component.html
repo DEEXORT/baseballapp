@@ -1,14 +1,16 @@
 <!--Лист игроков-->
   <div class="container">
     <div class="buttons-container">
-      <button [ngClass]="isSelectPlayer ? 'button-disabled' : 'button-style button-add'" (click)="addPlayer()">Добавить</button>
-      <button [ngClass]="isSelectPlayer ? 'button-edit' : 'button-disabled'">Редактировать</button>
-      <button [ngClass]="isSelectPlayer ? 'button-delete' : 'button-disabled'" (click)="deletePlayer()">Удалить</button>
+      <button [ngClass]="selectPlayer.id ? 'button-disabled' : 'button-style button-add'" (click)="showFormPlayer()">Добавить</button>
+      <button [ngClass]="selectPlayer.id ? 'button-edit' : 'button-disabled'" (click)="showFormPlayer()">Редактировать</button>
+      <button [ngClass]="selectPlayer.id ? 'button-delete' : 'button-disabled'" (click)="deletePlayer()">Удалить</button>
     </div>
 
 <!--    Форма для добавления/редактирования игроков-->
-<!--    <form-player *ngIf="true" (isCloseForm)="closeModalDialog()" [selectPlayer]="this.selectPlayer"></form-player>-->
-    <form-player *ngIf="isModalDialogVisible" (isCloseForm)="closeFormPlayer()" [(selectPlayer)]="this.selectPlayer"></form-player>
+    <form-player *ngIf="isFormPlayerVisible"
+                 (newPlayer)="editPlayersArray($event)"
+                 (isCloseForm)="this.isFormPlayerVisible = false"
+                 [selectPlayer]="this.selectPlayer"></form-player>
 
     <table>
       <thead>
@@ -20,7 +22,9 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let player of players" (click)="onSelectPlayer(player); isSelectPlayer = true">
+      <tr *ngFor="let player of players"
+          [ngClass]="selectPlayer.id == player.id ? 'select-player': ''"
+          (click)="onSelectPlayer(player)">
         <td><a href="#">{{player.name}}</a></td>
         <td>{{player.number}}</td>
         <td>{{player.batAndThrow}}</td>

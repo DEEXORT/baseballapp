@@ -1,8 +1,6 @@
 import {Injectable} from "@angular/core";
-import {IPlayer} from "../interfaces/player";
 import {map, Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
-import {log} from "@angular-devkit/build-angular/src/builders/ssr-dev-server";
 
 @Injectable()
 
@@ -28,16 +26,12 @@ export class HttpService {
     return this.http.post(this.url + '/' + table, data)
   }
 
-  updateRequest(table: string, id: number) {
-
+  updateRequest(table: string, data: any) {
+    return this.http.put(this.url + '/' + table + '/' + data.id, data)
   }
 
   deleteRequest(table: string, id: number) {
     return this.http.delete(this.url + '/' + table + '/' + id)
-  }
-
-  saveRequestPlayer(data: IPlayer) {
-
   }
 
 }

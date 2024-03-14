@@ -41,7 +41,8 @@
   </form>
 
   <div class="button-container">
-    <button [ngClass]="formPlayer?.valid ? 'button-add' : 'button-disabled'" (click)="saveToDatabase()">Сохранить</button>
+    <button [ngClass]="formPlayer?.valid ? 'button-add' : 'button-disabled'"
+            (click)="saveToDatabase()">Сохранить</button>
     <button class="button-light" (click)="closeForm()">Закрыть</button>
   </div>
   </div>

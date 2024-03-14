@@ -4,7 +4,6 @@ import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} fr
 import {IPlayer} from "../../../shared/interfaces/player";
 import {NgxMaskDirective, provideNgxMask} from "ngx-mask";
 import {NgSelectModule} from "@ng-select/ng-select";
-import {last} from "rxjs";
 import {HttpService} from "../../../shared/services/httpService";
 
 @Component({
@@ -17,7 +16,7 @@ import {HttpService} from "../../../shared/services/httpService";
 })
 export class FormPlayerComponent {
   @Input() selectPlayer: IPlayer
-  @Output() selectPlayerChange: EventEmitter<IPlayer> = new EventEmitter<IPlayer>
+  @Output() newPlayer: EventEmitter<IPlayer> = new EventEmitter<IPlayer>// Созданный или обновленный игрок
   @Output() isCloseForm: EventEmitter<boolean> = new EventEmitter<boolean>
 
   formPlayer: FormGroup;
@@ -43,6 +42,7 @@ export class FormPlayerComponent {
 
   private _createForm() {
     this.formPlayer = this.fb.group({
+      id: null,
       name: [
         '',
         [Validators.required,
@@ -78,22 +78,28 @@ export class FormPlayerComponent {
   }
 
   public saveToDatabase() {
-    // Добавление нового игрока в БД
-   this.httpService.saveRequest('players', this.formPlayer.value).subscribe({
-       next: result => {
-         this.formPlayer.patchValue(result)
-         alert("Игрок добавлен")
-         // Отправка добавленного игрока в лист игроков
-         this.selectPlayerChange.emit(result)
-         // Закрытие окна
-         this.closeForm()
-       }
-   })
+    if (this.selectPlayer.id) {
+      // Обновление игрока в БД
+      console.log(this.formPlayer.value)
+      this.httpService.updateRequest('players', this.formPlayer.value).subscribe({next: (result) => {
+        if (result) {
+          console.log(result)
+          this.newPlayer.emit(result)
+        }
+        }})
+    } else {
+      // Добавление нового игрока в БД
+      this.httpService.saveRequest('players', this.formPlayer.value).subscribe({
+        next: result => {
+          this.formPlayer.patchValue(result)
+          // Отправка нового игрока в ListPlayersComponent
+          this.newPlayer.emit(result)
+        }
+      })
+    }
   }
 
   public closeForm() {
     this.isCloseForm.emit(true);
   }
-
-  protected readonly last = last;
 }

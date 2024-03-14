@@ -1,4 +1,4 @@
-import {Component, Input, ViewChild,} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   ModalDialogComponentComponent
@@ -6,10 +6,6 @@ import {
 import {HttpService} from "../../shared/services/httpService";
 import {IPlayer} from "../../shared/interfaces/player";
 import {FormPlayerComponent} from "./form-player/form-player.component";
-
-interface ICloseForm {
-  action: string
-}
 
 @Component({
   selector: 'list-players',
@@ -19,16 +15,12 @@ interface ICloseForm {
   styleUrl: './list-players.component.scss'
 })
 export class ListPlayersComponent {
-  @Input() isConfirmed: boolean = false;
-  // @Input() isCloseForm: boolean = false;
+  @Input() newPlayer: IPlayer = {};
   @Input() isCloseForm: boolean;
-  @Input() playerFromForm: IPlayer;
 
   isSelectPlayer: boolean = false;
-  selectPlayer: IPlayer;
-  prevSelectPlayer: IPlayer;
-
-  public isModalDialogVisible: boolean = false;
+  isFormPlayerVisible: boolean = false;
+  selectPlayer: IPlayer = {};
   players: IPlayer[] = [];
 
   constructor(private httpService: HttpService) {
@@ -44,45 +36,51 @@ export class ListPlayersComponent {
     }});
   }
 
-  public addPlayer() {
-    this.isModalDialogVisible = true; // Временно
-}
+  public editPlayersArray(newPlayer: IPlayer) {
+    if (this.selectPlayer.id == newPlayer.id) {
+      // Обновление существующего игрока
+      this.selectPlayer = newPlayer
+      const index = this.players.findIndex(item => item.id == this.selectPlayer.id)
+      this.players[index] = newPlayer
+    } else {
+      // Добавление нового игрока
+      this.players.push(newPlayer)
+    }
+    this.isFormPlayerVisible = false; // Закрытие формы редактирования
+  }
 
-  public editPlayer() {
-    this.isModalDialogVisible = true; // Временно
+  public showFormPlayer() {
+    this.isFormPlayerVisible = true;
   }
 
   public deletePlayer() {
     if (this.selectPlayer.id) {
-      this.httpService.deleteRequest('players', this.selectPlayer.id).subscribe((res) => {
+      this.httpService.deleteRequest('players', this.selectPlayer.id).subscribe({next: (res) => {
         if (res) {
-          console.log(res)
-          console.log(this.selectPlayer.id)
           this.players = this.players.filter(item => item.id !== this.selectPlayer.id)
+          this.selectPlayer = {}
           alert("Игрок удален")
         }
-      })
+      }})
     }
-  }
-
-  public closeFormPlayer() {
-    this.isModalDialogVisible = false; // Временно
-    console.log(this.selectPlayer)
-
-    // Если игрок отредактирован, то...
-
-    // Если игрок добавлен, то ...
-    if (this.prevSelectPlayer != this.selectPlayer) {
-
-    }
-    // Если действий не было, то ...
-
-    this.isSelectPlayer = false;
-    this.selectPlayer = {};
   }
 
   public onSelectPlayer(player: IPlayer) {
-    this.selectPlayer = player;
+    // Если клик по тому же игроку
+    if (this.selectPlayer.id) {
+      // или по другому игроку
+      if (this.selectPlayer.id !== player.id) {
+        this.isSelectPlayer = true
+        this.selectPlayer = player
+        return
+      }
+      this.isSelectPlayer = false
+      this.selectPlayer = {}
+    } else {
+    // Выбор игрока
+      this.isSelectPlayer = true
+      this.selectPlayer = player
+    }
   }
 
 }
