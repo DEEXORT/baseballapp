@@ -1,0 +1,18 @@
+<div class="modal">
+
+  <div class="overlay"></div>
+
+  <div class="modal-confirm" [formGroup]="formTable">
+    <h1>Сохранение таблицы</h1>
+    <label for="nameStatTable">Имя таблицы</label>
+    <input type="text" id="nameStatTable" formControlName="nameStatTable">
+
+    <label for="seasonYear">Сезон:</label>
+    <select name="" id="seasonYear" formControlName="date">
+      <option [value]="year" *ngFor="let year of listYears">{{year}}</option>
+    </select>
+
+    <button (click)="saveTable()">Сохранить</button>
+    <button (click)="cancelSave()">Отменить</button>
+  </div>
+</div>

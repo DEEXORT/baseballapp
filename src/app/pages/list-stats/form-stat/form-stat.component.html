@@ -1,0 +1,34 @@
+<div class="container-table-upload">
+  <div class="upload-stat">
+    <input type="file" (change)="onFileChange($event)">
+    <button class="button-add" (click)="saveTable()">Сохранить</button>
+    <button class="button-add" (click)="showFormPlayer()">Добавить игрока</button>
+  </div>
+
+  <form-player *ngIf="isFormPlayerVisible"
+               (isCloseForm)="isFormPlayerVisible = false"
+               (newPlayer)="editPlayersArray($event)"></form-player>
+
+  <stat-save *ngIf="isModalConfirmVisible"
+             (isCloseForm)= "isModalConfirmVisible = false"
+             [table]="this.data"></stat-save>
+
+  <table>
+    <thead>
+    <th>Поиск игрока</th>
+    <th *ngFor="let columnName of Object.values(columnsTable)">{{columnName}}</th>
+    </thead>
+    <tbody>
+    <tr [ngClass]="{playernotfound: !player?.playerId}" id='{{player?.playerId}}' *ngFor="let player of data">
+      <td>
+        <ng-select [(ngModel)]="player.playerId" (change)="checkIStatPlayer(player)">
+          <ng-option >Добавить игрока</ng-option>
+          <ng-option *ngFor="let playerDb of dbPlayers" [value] = playerDb.id>{{playerDb.name}}</ng-option>
+        </ng-select>
+        <span>В таблице: {{player.namePlayer}}</span>
+      </td>
+      <td *ngFor=" let key of Object.keys(this.columnsTable) ">{{player[strToKey(key)]}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
