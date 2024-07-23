@@ -15,7 +15,12 @@ import {HttpService} from "../../../shared/services/httpService";
   styleUrl: './form-player.component.scss'
 })
 export class FormPlayerComponent {
-  @Input() selectPlayer: IPlayer
+  @Input() selectPlayer: IPlayer = {
+    name: '',
+    number: null,
+    position: [],
+    batAndThrow: ''
+  }
   @Output() newPlayer: EventEmitter<IPlayer> = new EventEmitter<IPlayer>// Созданный или обновленный игрок
   @Output() isCloseForm: EventEmitter<boolean> = new EventEmitter<boolean>
 
@@ -31,8 +36,6 @@ export class FormPlayerComponent {
 
   ngOnInit() {
     console.log('Запуск компонента FormPlayer')
-    this.formPlayer.valueChanges.subscribe((v) => {
-      console.log(v)});
 
     if (this.selectPlayer) {
       this.formPlayer.patchValue(this.selectPlayer)
@@ -81,16 +84,18 @@ export class FormPlayerComponent {
     if (this.selectPlayer.id) {
       // Обновление игрока в БД
       console.log(this.formPlayer.value)
-      this.httpService.updateRequest('players', this.formPlayer.value).subscribe({next: (result) => {
+      this.httpService.updatePlayer('players', this.formPlayer.value).subscribe({
+        next: (result: IPlayer) => {
         if (result) {
           console.log(result)
+          // Отправка обновленного игрока в ListPlayersComponent
           this.newPlayer.emit(result)
         }
         }})
     } else {
       // Добавление нового игрока в БД
-      this.httpService.saveRequest('players', this.formPlayer.value).subscribe({
-        next: result => {
+      this.httpService.savePlayer(this.formPlayer.value).subscribe({
+        next: (result: IPlayer) => {
           this.formPlayer.patchValue(result)
           // Отправка нового игрока в ListPlayersComponent
           this.newPlayer.emit(result)

@@ -1,9 +1,36 @@
-.container {
-  min-height: 600px;
-  max-width: 600px;
+$height-container: 600px;
+$width-container: 600px;
 
-  // Временно
-  margin: 100px;
+.modal {
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.overlay {
+  background-color: #000000;
+  width: 100%;
+  height: 100%;
+  opacity: 0.5;
+  position: absolute;
+  top: 0; left: 0;
+  z-index: 2;
+}
+
+.modal-window {
+  min-height: $height-container;
+  max-width: $width-container;
+  position: relative;
+  z-index: 3;
+  left: 0; right: 0;
+  margin: 50px auto;
+  padding: 30px;
+  background: #ffffff;
+  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.7);
+  border-radius: 5px;
 }
 
 @import '../../shared/styles/forms';
@@ -13,6 +40,7 @@
 input[type=text], input[type=number], select {
   @include input-form;
   display: block;
+  width: 100%;
 
   &:focus {
     outline: none;
@@ -54,5 +82,5 @@ label {
 
 .ng-select-material {
   @import "../node_modules/@ng-select/ng-select/themes/material.theme.css";
-  max-width: 300px;
+  max-width: $width-container;
 }

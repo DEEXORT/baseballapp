@@ -33,22 +33,40 @@
       ]
     },
     {
-      "id": 4,
-      "name": "Иван П",
-      "number": 45,
-      "batAndThrow": "R/L",
+      "id": 6,
+      "name": "Посадский Максим",
+      "number": 69,
+      "batAndThrow": "R/R",
       "position": [
         "C"
       ]
     },
     {
-      "id": 5,
-      "name": "Fernando",
-      "number": 1,
+      "id": 7,
+      "name": "Сташко Яна",
+      "number": 9,
       "batAndThrow": "R/R",
       "position": [
-        "P"
+        "2B"
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Чаплыгин Вадим",
+      "number": 5,
+      "batAndThrow": "R/R",
+      "position": [
+        "P",
+        "1B",
+        "RF",
+        "2B"
       ]
     }
+  ],
+  "tables": [
+
+  ],
+  "stats": [
+
   ]
 }

@@ -1,48 +1,54 @@
-<div class="container">
-  <h1>Форма игрока</h1>
-  <form [formGroup]="formPlayer">
+<div class="modal">
 
-    <label for="name">Имя</label>
-    <input [ngClass]="cssFormValidator('name')"
-           id="name"
-           type="text"
-           formControlName="name">
-    <div *ngIf="cssFormValidator('name') === 'input-invalid'" class="prompt">Введите не менее 5 символов</div>
+  <div class="modal-window">
+    <h1>Форма игрока</h1>
+    <form [formGroup]="formPlayer">
 
-    <label for="number">Номер</label>
-    <input [ngClass]="cssFormValidator('number')"
-           id="number"
-           type="number"
-           formControlName="number">
+      <label for="name">Имя</label>
+      <input [ngClass]="cssFormValidator('name')"
+             id="name"
+             type="text"
+             formControlName="name">
+      <div *ngIf="cssFormValidator('name') === 'input-invalid'" class="prompt">Введите не менее 5 символов</div>
 
-    <label for="batAndThrow">На бите/бросковая рука</label>
-    <input [ngClass]="cssFormValidator('batAndThrow')"
-           [inputTransformFn]="inputTransformFn"
-           [showMaskTyped]="true"
-           [dropSpecialCharacters]="false"
-           id="batAndThrow"
-           type="text"
-           formControlName="batAndThrow"
-           mask="A/A">
-    <div *ngIf="cssFormValidator('batAndThrow') === 'input-invalid'" class="prompt">Введите R(Right) или L(Left)</div>
+      <label for="number">Номер</label>
+      <input [ngClass]="cssFormValidator('number')"
+             id="number"
+             type="number"
+             formControlName="number">
 
-    <label for="position">Позиция</label>
-    <ng-select
-      [multiple]="true"
-      [closeOnSelect]="false"
-      [hideSelected]="true"
-      [items]="positionOptions"
-      id="position"
-      dropdownPosition="bottom"
-      formControlName="position"
-      class="ng-select-material">
-      <ng-option *ngFor="let position of positionOptions">{{position}}</ng-option>
-    </ng-select>
-  </form>
+      <label for="batAndThrow">На бите/бросковая рука</label>
+      <input [ngClass]="cssFormValidator('batAndThrow')"
+             [inputTransformFn]="inputTransformFn"
+             [showMaskTyped]="true"
+             [dropSpecialCharacters]="false"
+             id="batAndThrow"
+             type="text"
+             formControlName="batAndThrow"
+             mask="A/A">
+      <div *ngIf="cssFormValidator('batAndThrow') === 'input-invalid'" class="prompt">Введите R(Right) или L(Left)</div>
 
-  <div class="button-container">
-    <button [ngClass]="formPlayer?.valid ? 'button-add' : 'button-disabled'"
-            (click)="saveToDatabase()">Сохранить</button>
-    <button class="button-light" (click)="closeForm()">Закрыть</button>
+      <label for="position">Позиция</label>
+      <ng-select
+        [multiple]="true"
+        [closeOnSelect]="false"
+        [hideSelected]="true"
+        [items]="positionOptions"
+        id="position"
+        dropdownPosition="bottom"
+        formControlName="position"
+        class="ng-select-material">
+        <ng-option *ngFor="let position of positionOptions">{{position}}</ng-option>
+      </ng-select>
+    </form>
+
+    <div class="button-container">
+      <button [ngClass]="formPlayer?.valid ? 'button-add' : 'button-disabled'"
+              (click)="saveToDatabase()">Сохранить</button>
+      <button class="button-light" (click)="closeForm()">Закрыть</button>
+    </div>
   </div>
-  </div>
+
+  <div class="overlay"></div>
+
+</div>

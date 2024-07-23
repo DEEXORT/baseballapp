@@ -1,8 +1,5 @@
 import {Component, Input} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  ModalDialogComponentComponent
-} from "../../shared/components/modal-dialog-component/modal-dialog-component.component";
 import {HttpService} from "../../shared/services/httpService";
 import {IPlayer} from "../../shared/interfaces/player";
 import {FormPlayerComponent} from "./form-player/form-player.component";
@@ -10,17 +7,27 @@ import {FormPlayerComponent} from "./form-player/form-player.component";
 @Component({
   selector: 'list-players',
   standalone: true,
-  imports: [CommonModule, ModalDialogComponentComponent, FormPlayerComponent],
+  imports: [CommonModule, FormPlayerComponent],
   templateUrl: './list-players.component.html',
   styleUrl: './list-players.component.scss'
 })
 export class ListPlayersComponent {
-  @Input() newPlayer: IPlayer = {};
+  @Input() newPlayer: IPlayer = {
+    name: '',
+    number: null,
+    position: [],
+    batAndThrow: ''
+  };
   @Input() isCloseForm: boolean;
 
   isSelectPlayer: boolean = false;
   isFormPlayerVisible: boolean = false;
-  selectPlayer: IPlayer = {};
+  selectPlayer: IPlayer = {
+    name: '',
+    number: null,
+    position: [],
+    batAndThrow: ''
+  };
   players: IPlayer[] = [];
 
   constructor(private httpService: HttpService) {
@@ -55,13 +62,20 @@ export class ListPlayersComponent {
 
   public deletePlayer() {
     if (this.selectPlayer.id) {
-      this.httpService.deleteRequest('players', this.selectPlayer.id).subscribe({next: (res) => {
+      this.httpService.deletePlayer(this.selectPlayer.id).subscribe(
+        {next: (res) => {
         if (res) {
           this.players = this.players.filter(item => item.id !== this.selectPlayer.id)
-          this.selectPlayer = {}
+          this.selectPlayer = {
+            name: '',
+            number: null,
+            position: [],
+            batAndThrow: ''
+          }
           alert("Игрок удален")
         }
-      }})
+      }
+        })
     }
   }
 
@@ -75,7 +89,12 @@ export class ListPlayersComponent {
         return
       }
       this.isSelectPlayer = false
-      this.selectPlayer = {}
+      this.selectPlayer = {
+        name: '',
+        number: null,
+        position: [],
+        batAndThrow: ''
+      }
     } else {
     // Выбор игрока
       this.isSelectPlayer = true
